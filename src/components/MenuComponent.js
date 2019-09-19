@@ -46,14 +46,13 @@ class Menu extends Component {
     const menu = this.props.dishes.map(dish => {
       return (
         <div className="col-12 col-md-5 m-1">
-          <Card key={dish.id} onClick={() => this.onDishSelect(dish)}>
-            {" "}
-            {/* Here, the component's state changes by setState and React decides to re-render the component. */}
-            <CardImg width="100%" src={dish.image} alt={dish.name} />
-            <CardImgOverlay>
-              <CardTitle>{dish.name}</CardTitle>
-            </CardImgOverlay>
-          </Card>
+            <Card key={dish.id} onClick={() => this.props.onClick(dish.id)}>
+              {/* Here, the component's state changes by setState and React decides to re-render the component. */}
+              <CardImg width="100%" src={dish.image} alt={dish.name} />
+              <CardImgOverlay>
+                <CardTitle>{dish.name}</CardTitle>
+              </CardImgOverlay>
+            </Card>
         </div>
       );
     });
@@ -65,7 +64,6 @@ class Menu extends Component {
           This renders the selected dish at the end 
           {this.renderDish(this.state.selectedDish)}
         */}
-        <Dishdetail dish={this.state.selectedDish} />
       </div>
     );
   }
