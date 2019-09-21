@@ -42,7 +42,7 @@ const RenderDish = ({ dish }) => {
 };
 
 // Q. Implement a function named renderComments() that takes the comments array as a parameter and lays out each comment as shown in the image below. You should use the Bootstrap list-unstyled class on the list.
-const RenderComments = ({ comments, addComment, dishId }) => {
+const RenderComments = ({ comments, postComment, dishId }) => {
   if (comments != null) {
     return (
       <div>
@@ -64,7 +64,7 @@ const RenderComments = ({ comments, addComment, dishId }) => {
             );
           })}
         </ul>
-        <CommentForm dishId={dishId} addComment={addComment} />
+        <CommentForm dishId={dishId} postComment={postComment} />
       </div>
     );
   } else {
@@ -111,7 +111,7 @@ const Dishdetail = props => {
           <div className="col-12 col-md-5 m-1">
             <RenderComments
               comments={props.comments}
-              addComment={props.addComment}
+              postComment={props.postComment}
               dishId={props.dish.id}
             />
           </div>
@@ -142,12 +142,7 @@ class CommentForm extends Component {
 
   handleSubmit(values) {
     this.toggleModal();
-    this.props.addComment(
-      this.props.dishId,
-      values.rating,
-      values.author,
-      values.comment
-    );
+    this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
   }
 
   render() {
